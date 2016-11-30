@@ -1,0 +1,226 @@
+FORMAT: 1A
+HOST: staging.monitoring-assistance.com/api/v1
+
+# Monitoring Assistance
+
+Welcome to Monitoring Assistance API.
+
+First of all, you need to create your own API key through your Monitoring Assistance Dashboard to use this API.
+[Dashboard > My Account > API Keys > Generate new API Key]. 
+
+## Monitoring Systems [/monitoring-systems]
+
+### List All Monitoring Systems [GET]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+
+
++ Response 200 (application/json)
+
+    + Attributes
+        - errors: `false` (boolean) - Define if an error occurs
+        - count: `1` (number) - Define the number of Monitoring Systems found
+        - data:
+            - collection:
+                - id: `1` (number) - id of Monitoring System
+                - serial_number: `8600548654` (string) - serial number of Monitoring System
+                - update_frequency: `5` (number) - Monitoring System sends it data every X minutes
+                - last_connection_at: `2016-08-30 08:00:00` (string) - Last Connection to our servers
+                - installation_name: `CM` (string) - Name of the installation where is installed the Monitoring System
+                - type: `GreenBox GV` (string) - Type of Monitoring System
+                - transfer_technology: `GPRS` (string) - Type of transfer technology
+                
+
+### Find one Monitoring Systems [GET  /monitoring-systems/{serial_number}/show]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+
++ Parameters
+
+    + serial_number: `8600548654` - The serial number of monitoring system to filter on
+    
++ Response 200 (application/json)
+
+    + Attributes
+        - errors: `false` (boolean) - Define if an error occurs
+        - count: `1` (number) - Define the number of Monitoring Systems found
+        - data:
+            - collection:
+                - id: `1` (number) - id of Monitoring System
+                - serial_number: `8600548654` (string) - serial number of Monitoring System
+                - update_frequency: `5` (number) - Monitoring System sends it data every X minutes
+                - last_connection_at: `2016-08-30 08:00:00` (string) - Last Connection to our servers
+                - installation_name: `CM` (string) - Name of the installation where is installed the Monitoring System
+                - type: `GreenBox GV` (string) - Type of Monitoring System
+                - transfer_technology: `GPRS` (string) - Type of transfer technology
+    
+
+### List All Devices linked to a Monitoring System [GET /monitoring-systems/{serial_number}/devices]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+
++ Parameters
+
+    + serial_number: `1` (number, required) - The serial number of monitoring system to retrieve all linked devices
+    
++ Response 200 (application/json)
+
+    + Attributes
+        - errors: `false` (boolean) - Define if an error occurs
+        - count: `1` (number) - Define the number of Devices found
+        - data:
+            - collection:
+                - id: `1` (number) - id of Device
+                - description: `Swimming Pool Monitoring` (string) - Device description
+                - type: `Water Meter` (string) - Type of Device
+                - serial_number: `789-985` (string) - Serial number of Device
+                - unit: `L` (string) - Unit of the measurand
+                - index: `102` (number) - Current Index of Device
+
+## Devices [/devices/{id}/show]
+
+### Get Data by day for a Device [POST /devices/{id}/day/show]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+            
+    + Body 
+    
+            timeframe
+       
++ Parameters
+
+    + id: `1` (number, required) - The id of device to retrieve all necessary data
+    + timeframe: `2016-08-30` (string, required) - Specify the day to retrieve data
+    
++ Response 200 (application/json)
+
+    + Attributes
+        - errors: `false` (boolean) - Define if an error occurs
+        - count: `1` (number) - Define the number of Data found
+        - data:
+            - collection:
+                - date: `2016-08-30 08:00:00` (string) - date of Data
+                - value: 25 (number) - value of data. Unit 
+            
+### Get Data by month for a Device [POST /devices/{id}/month/show]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+            
+    + Body 
+    
+            timeframe
+       
++ Parameters
+
+    + id: `1` (number, required) - The id of device to retrieve all necessary data
+    + timeframe: `2016-08` (string, required) - Specify the month to retrieve data
+    
++ Response 200 (application/json)
+
+    + Attributes
+        - errors: `false` (boolean) - Define if an error occurs
+        - count: `1` (number) - Define the number of Data found
+        - data:
+            - collection:
+                - date: `2016-08-01` (string) - date of Data
+                - value: 150 (number) - value of data. Unit 
+
+### Get Data by year for a Device [POST /devices/{id}/year/show]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+            
+    + Body 
+    
+            timeframe
+       
++ Parameters
+
+    + id: `1` (number, required) - The id of device to retrieve all necessary data
+    + timeframe: `2016` (string, required) - Specify the year to retrieve data
+    
++ Response 200 (application/json)
+
+    + Attributes
+        - errors: `false` (boolean) - Define if an error occurs
+        - count: `1` (number) - Define the number of Data found
+        - data:
+            - collection:
+                - date: `2016-08` (string) - date of Data
+                - value: 1025 (number) - value of data. Unit 
+                
+                
+### Get Data by year range for a Device [POST /devices/{id}/year-range/show]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+            
+    + Body 
+    
+            timeframe
+       
++ Parameters
+
+    + id: `1` (number, required) - The id of device to retrieve all necessary data
+    + timeframe: `2000-2016` (string, optional) - Specify the year range to retrieve data
+    
++ Response 200 (application/json)
+
+    + Attributes
+        - errors: `false` (boolean) - Define if an error occurs
+        - count: `1` (number) - Define the number of Data found
+        - data:
+            - collection:
+                - date: `2016-08` (string) - date of Data
+                - value: 1025 (number) - value of data. Unit 
+    
+
+### Get total Data for a Device [POST /devices/{id}/total/show]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+            
+       
++ Parameters
+
+    + id: `1` (number, required) - The id of device to retrieve all necessary data
+    
+    
++ Response 200 (application/json)
+
+    + Attributes
+        - errors: `false` (boolean) - Define if an error occurs
+        - count: `1` (number) - Define the number of Data found
+        - data:
+            - collection:
+                - date: `total` (string) - date of Data
+                - value: 10587 (number) - value of data. Unit
