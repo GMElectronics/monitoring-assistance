@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: www.monitoring-assistance.com/api/v1
+HOST: https://www.monitoring-assistance.com/api/v1
 
 # Monitoring Assistance
 
@@ -111,12 +111,12 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - errors: `false` (boolean) - Define if an error occurs
-        - count: `1` (number) - Define the number of Data found
-        - data:
-            - collection:
-                - date: `2016-08-30 08:00:00` (string) - date of Data
-                - value: 25 (number) - value of data. Unit 
+        - date: `2017-06-21` (string) - Define the current date
+        - raw: `1200` (number) - Rw data
+        - x: `00h00` (string) - x value axis
+        - y: `120` (number) - y value axis
+        - color: `#d4e90f` (string) - Define the color on graphic
+        - unit: `kWh` (string)
             
 ### Get Data by month for a Device [POST /devices/{id}/month/show]
 
@@ -138,12 +138,13 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - errors: `false` (boolean) - Define if an error occurs
-        - count: `1` (number) - Define the number of Data found
-        - data:
-            - collection:
-                - date: `2016-08-01` (string) - date of Data
-                - value: 150 (number) - value of data. Unit 
+        - date: `2017-06-21` (string) - Define the current date
+        - raw: `1200` (number) - Rw data
+        - x: `1` (string) - x value axis
+        - y: `120` (number) - y value axis
+        - color: `#d4e90f` (string) - Define the color on graphic
+        - unit: `kWh` (string)
+        - url: (string) - internal use
 
 ### Get Data by year for a Device [POST /devices/{id}/year/show]
 
@@ -165,12 +166,13 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - errors: `false` (boolean) - Define if an error occurs
-        - count: `1` (number) - Define the number of Data found
-        - data:
-            - collection:
-                - date: `2016-08` (string) - date of Data
-                - value: 1025 (number) - value of data. Unit 
+        - date: `2017` (string) - Define the current date
+        - raw: `1200` (number) - Rw data
+        - x: `2017` (string) - x value axis
+        - y: `120` (number) - y value axis
+        - color: `#d4e90f` (string) - Define the color on graphic
+        - unit: `kWh` (string)
+        - url: (string) - internal use
                 
                 
 ### Get Data by year range for a Device [POST /devices/{id}/year-range/show]
@@ -193,12 +195,13 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - errors: `false` (boolean) - Define if an error occurs
-        - count: `1` (number) - Define the number of Data found
-        - data:
-            - collection:
-                - date: `2016-08` (string) - date of Data
-                - value: 1025 (number) - value of data. Unit 
+        - date: `2017` (string) - Define the current date
+        - raw: `1200` (number) - Rw data
+        - x: `Jan` (string) - x value axis
+        - y: `120` (number) - y value axis
+        - color: `#d4e90f` (string) - Define the color on graphic
+        - unit: `kWh` (string)
+        - url: (string) - internal use
     
 
 ### Get total Data for a Device [POST /devices/{id}/total/show]
@@ -218,9 +221,9 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - errors: `false` (boolean) - Define if an error occurs
-        - count: `1` (number) - Define the number of Data found
-        - data:
-            - collection:
-                - date: `total` (string) - date of Data
-                - value: 10587 (number) - value of data. Unit
+        - date: `Total` (string) - Define the current date
+        - raw: `78630` (number) - Rw data
+        - x: `Total` (string) - x value axis
+        - y: `786` (number) - y value axis
+        - color: `#d4e90f` (string) - Define the color on graphic
+        - unit: `kWh` (string)
