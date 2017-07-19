@@ -8,9 +8,54 @@ Welcome to Monitoring Assistance API.
 First of all, you need to create your own API key through your Monitoring Assistance Dashboard to use this API.
 [Dashboard > My Account > API Keys > Generate new API Key]. 
 
-## Monitoring Systems [/monitoring-systems]
+## Customers [/customers]
 
-### List All Monitoring Systems [GET]
+### Verify if a customer exists [POST /customers/login]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+            
++ Parameters 
+    
+    + email: `email` (string, required) - The email of the Customer is used as login
+    + password: `password` (string, required) - The password of the Customer
+
+
++ Response 200 (application/json)
+
+    + Attributes
+        - errors: `false` (boolean) - Define if an error occurs
+        - count: `1` (number) - Define the number of Installations found
+        - data:
+            - collection:
+                - id: `1` (number) - id of Customer
+                - first_name: `Cédric` (string) - Firstname of the Customer
+                - last_name: `Dupont` (string) - Lastname of the Customer
+                - email: `info@monitoring-assistance.com` (string) - Email of the Customer
+                - language_code: `fr` (string) - Language of the Customer
+                - Installation:
+                    - id: `1` (number) - id of Installation
+                    - name: `CTC` (string) - name of the Installation
+                    - is_active: `1` (number) - Installation is active or not
+                    - external_id: `105` (number) - Id from the external database
+                    - installed_at: `2017-02-10` (string) - Installation date of the Installation
+                    - Monitoring System:
+                        - id: `1` (number) - id of Monitoring System
+                        - timezone: `UTC` (string) - timezone of Monitoring System
+                        - serial_number: `8600548654` (string) - serial number of Monitoring System
+                        - is_active: `1` (number) - Monitoring System is active or not
+                        - last_connection_at: `2017-02-10 00:00:01` (string) - Last connection date of Monitoring System 
+                        - installation_name: `CM` (string) - Name of the installation where is installed the Monitoring System
+                        - Monitoring System Type:
+                            - type: `GreenBox GV` (string) - Type of Monitoring System
+                            - transfer_technology: `GPRS` (string) - Type of transfer technology
+
+## Installations [/installations]
+
+### List All Installations [GET]
 
 + Request (application/json)
 
@@ -23,45 +68,75 @@ First of all, you need to create your own API key through your Monitoring Assist
 
     + Attributes
         - errors: `false` (boolean) - Define if an error occurs
-        - count: `1` (number) - Define the number of Monitoring Systems found
+        - count: `1` (number) - Define the number of Installations found
         - data:
             - collection:
-                - id: `1` (number) - id of Monitoring System
-                - serial_number: `8600548654` (string) - serial number of Monitoring System
-                - update_frequency: `5` (number) - Monitoring System sends it data every X minutes
-                - last_connection_at: `2016-08-30 08:00:00` (string) - Last Connection to our servers
-                - installation_name: `CM` (string) - Name of the installation where is installed the Monitoring System
-                - type: `GreenBox GV` (string) - Type of Monitoring System
-                - transfer_technology: `GPRS` (string) - Type of transfer technology
-                
-
-### Find one Monitoring Systems [GET  /monitoring-systems/{serial_number}/show]
+                - id: `1` (number) - id of Installation
+                - name: `CTC` (string) - name of the Installation
+                - is_active: `1` (number) - Installation is active or not
+                - external_id: `105` (number) - Id from the external database
+                - installed_at: `2017-02-10` (string) - Installation date of the Installation
+                - Monitoring System:
+                    - id: `1` (number) - id of Monitoring System
+                    - timezone: `UTC` (string) - timezone of Monitoring System
+                    - serial_number: `8600548654` (string) - serial number of Monitoring System
+                    - is_active: `1` (number) - Monitoring System is active or not
+                    - last_connection_at: `2017-02-10 00:00:01` (string) - Last connection date of Monitoring System 
+                    - installation_name: `CM` (string) - Name of the installation where is installed the Monitoring System
+                    - Monitoring System Type:
+                        - type: `GreenBox GV` (string) - Type of Monitoring System
+                        - transfer_technology: `GPRS` (string) - Type of transfer technology
+                        
+### Get Theorical Index [POST /installations/theorical-index]
 
 + Request (application/json)
 
     + Headers
     
             Authorization: Bearer {token}
-
+            
+       
 + Parameters
 
-    + serial_number: `8600548654` - The serial number of monitoring system to filter on
+    + latitude: `50.5` (number, required) - latitude of the installation
+    + longitude: `4.4` (number, required) - longitude of the installation
+    + angle: `35` (number, required) - angle of the PV installation
+    + direction: `180` (number, required) - Direction of the PV installation (180° = South)
+    + installation_power: `50000` (number, required) - Power of the PV installation (in Wc)
+    + installation_date: `2017-02-02` (string, required) - Installation date of the PV installation
+    
     
 + Response 200 (application/json)
 
     + Attributes
-        - errors: `false` (boolean) - Define if an error occurs
-        - count: `1` (number) - Define the number of Monitoring Systems found
-        - data:
-            - collection:
-                - id: `1` (number) - id of Monitoring System
-                - serial_number: `8600548654` (string) - serial number of Monitoring System
-                - update_frequency: `5` (number) - Monitoring System sends it data every X minutes
-                - last_connection_at: `2016-08-30 08:00:00` (string) - Last Connection to our servers
-                - installation_name: `CM` (string) - Name of the installation where is installed the Monitoring System
-                - type: `GreenBox GV` (string) - Type of Monitoring System
-                - transfer_technology: `GPRS` (string) - Type of transfer technology
+        - theorical_index: `9214.2` (number) - Define the index of the electrical meter today
+        
+### Get Coordinates [POST /installations/coordinates]
+
++ Request (application/json)
+
+    + Headers
     
+            Authorization: Bearer {token}
+            
+       
++ Parameters
+
+    + street_name: `rue de termonde` (string, required) - street
+    + street_number: `140` (number, required) - street number
+    + city: `bruxelles` (string, required) - city
+    + zip: `180` (number, required) - zip code
+    + country_code: `BE` (string, required) - country code
+    
+    
++ Response 200 (application/json)
+
+    + Attributes
+        - latitude: `50` (number) - latitude
+        - longitude: `4` (number) - longitude
+
+## Monitoring Systems [/monitoring-systems]
+
 
 ### List All Devices linked to a Monitoring System [GET /monitoring-systems/{serial_number}/devices]
 
@@ -227,3 +302,5 @@ First of all, you need to create your own API key through your Monitoring Assist
         - y: `786` (number) - y value axis
         - color: `#d4e90f` (string) - Define the color on graphic
         - unit: `kWh` (string)
+        
+        ## Devices [/devices/{id}/show]
