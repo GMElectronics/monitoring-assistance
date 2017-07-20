@@ -156,11 +156,21 @@ First of all, you need to create your own API key through your Monitoring Assist
         - data:
             - collection:
                 - id: `1` (number) - id of Device
-                - description: `Swimming Pool Monitoring` (string) - Device description
-                - type: `Water Meter` (string) - Type of Device
                 - serial_number: `789-985` (string) - Serial number of Device
+                - description: `Swimming Pool Monitoring` (string) - Device description
+                - pulse_ratio: `1000` (number) - Device pulse ratio 
+                - personal_color: `#656565` (string) - Define a personal color for the graphics for this device
+                - power: `100` (number) - Power of the device (Inverter for example, 15 kWp)
+                - is_active: `1` (number) - Define if the device is active or not
+                - is_injection: `true` (string) - Define if the device is an injection or not
+                - is_production: `true` (string) - Define if the device is a production of energy or not
+                - production_type: `photovoltaic` (string) - define the type of production
+                - initial_index: `10` (number) - define the index of the meter when the monitoring system was installed
+                - current_index: `10` (number) - current index of the meter (consumption or production + initial index)
+                - brand: `schneider` (string) - brand of the device
+                - model: `PM800` (string) - model of the device
+                - type: `Water Meter` (string) - Type of Device
                 - unit: `L` (string) - Unit of the measurand
-                - index: `102` (number) - Current Index of Device
 
 ## Devices [/devices/{id}/show]
 
