@@ -51,6 +51,83 @@ First of all, you need to create your own API key through your Monitoring Assist
                         - Monitoring System Type:
                             - type: `GreenBox GV` (string) - Type of Monitoring System
                             - transfer_technology: `GPRS` (string) - Type of transfer technology
+                            
+                            ## Customers [/customers]
+
+## Prospects [/prospects]
+
+### Create a prospect [POST /prospect/create]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+            
++ Parameters 
+    
+    + prospect_login: `email` (string, required) - Prospect's email is used as login
+    + prospect_password: `password` (string, required) - Password
+    + prospect_first_name: `alex` (string, required) - Firstname
+    + prospect_last_name: `dupont` (string, required) - Lastname
+    + prospect_language_code: `FR` (string, required) - Language Code
+    + prospect_address_name: `Home` (string, required) - Name of the address
+    + prospect_address_street: `Rue des patates` (string, required) - Street
+    + prospect_address_street_number: `24` (string, required) - Street Number
+    + prospect_address_box: `2` (string) - Box
+    + prospect_address_city: `Bruxelles` (string, required) - City
+    + prospect_address_zip: `1000` (string, required) - Zip code
+    + prospect_address_country_code: `BE` (string, required) - Country Code
+    + prospect_address_phone: `042587545` (string, required) - Phone
+    + prospect_installation_name: `042587545` (string, required) - Name of the installation
+    + prospect_installation_date: `042587545` (string, required) - Creation date of the installation
+    + prospect_installation_power: `042587545` (string, required) - Power
+    + prospect_installation_longitude: `042587545` (string, required) - Longitude
+    + prospect_installation_latitude: `042587545` (string, required) - Latitude
+    + prospect_installation_direction: `042587545` (string, required) - Direction
+    + prospect_installation_angle: `042587545` (string, required) - Angle
+
++ Response 200 (application/json)
+
+    + Attributes
+        - answer: `prospect inserted in database` (string)
+        
+### Update a prospect [POST /prospect/update]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer {token}
+            
++ Parameters 
+    
+    + prospect_login: `email` (string, required) - Prospect's email is used as login
+    + prospect_password: `password` (string, required) - Password
+    + prospect_first_name: `alex` (string, required) - Firstname
+    + prospect_last_name: `dupont` (string, required) - Lastname
+    + prospect_language_code: `FR` (string, required) - Language Code
+    + prospect_address_name: `Home` (string, required) - Name of the address
+    + prospect_address_street: `Rue des patates` (string, required) - Street
+    + prospect_address_street_number: `24` (string, required) - Street Number
+    + prospect_address_box: `2` (string) - Box
+    + prospect_address_city: `Bruxelles` (string, required) - City
+    + prospect_address_zip: `1000` (string, required) - Zip code
+    + prospect_address_country_code: `BE` (string, required) - Country Code
+    + prospect_address_phone: `042587545` (string, required) - Phone
+    + prospect_installation_name: `042587545` (string, required) - Name of the installation
+    + prospect_installation_date: `042587545` (string, required) - Creation date of the installation
+    + prospect_installation_power: `042587545` (string, required) - Power
+    + prospect_installation_longitude: `042587545` (string, required) - Longitude
+    + prospect_installation_latitude: `042587545` (string, required) - Latitude
+    + prospect_installation_direction: `042587545` (string, required) - Direction
+    + prospect_installation_angle: `042587545` (string, required) - Angle
+
++ Response 200 (application/json)
+
+    + Attributes
+        - answer: `prospect updated` (string)
+
 
 ## Installations [/installations]
 
@@ -171,6 +248,15 @@ First of all, you need to create your own API key through your Monitoring Assist
                 - model: `PM800` (string) - model of the device
                 - type: `Water Meter` (string) - Type of Device
                 - unit: `L` (string) - Unit of the measurand
+                - photovoltaic_roofs:
+                    - direction: `5` (number) - Number of degrees from South (0 is the South)
+                    - angle: `35` (number) - Number of degrees for the angle. 0 is horizontal.
+                    - panel_power: `250` (number) - Power of each panel
+                    - string_configuration: `1:1` (string) - String configuration on the inverter
+                    - panel_number: `10` (number) - Number of panels installed on the string
+                    - panel_brand: `Sunpower` (string) - Brand of the panels
+                    - panel_type: `Black` (string) - Type of panel (Black, Blue, ...)
+                    - theorical_xxx: `293` (number) - Theorical production in kWh for each month of the year
 
 ## Devices [/devices/{id}/show]
 
@@ -195,11 +281,14 @@ First of all, you need to create your own API key through your Monitoring Assist
 
     + Attributes
         - date: `2017-06-21` (string) - Define the current date
-        - raw: `1200` (number) - Rw data
         - x: `00h00` (string) - x value axis
-        - y: `120` (number) - y value axis
+        - y: `120` (number) - y value axis (null if no data available)
         - color: `#d4e90f` (string) - Define the color on graphic
         - unit: `kWh` (string)
+        - qf: `100` (number) - Quality Factor (internal use)
+        - tz: `Europe/Brussels` (string) - TimeZone
+        - iv: `false` (string) - Define if the value is interpolated
+        - url: (string) - Quick link in javascript (internal use)
             
 ### Get Data by month for a Device [POST /devices/{id}/month/show]
 
@@ -222,12 +311,14 @@ First of all, you need to create your own API key through your Monitoring Assist
 
     + Attributes
         - date: `2017-06-21` (string) - Define the current date
-        - raw: `1200` (number) - Rw data
         - x: `1` (string) - x value axis
-        - y: `120` (number) - y value axis
+        - y: `120` (number) - y value axis (null if no data available)
         - color: `#d4e90f` (string) - Define the color on graphic
         - unit: `kWh` (string)
-        - url: (string) - internal use
+        - qf: `100` (number) - Quality Factor (internal use)
+        - tz: `Europe/Brussels` (string) - TimeZone 
+        - iv: `false` (string) - Define if the value is interpolated
+        - url: (string) - Quick link in javascript (internal use)
 
 ### Get Data by year for a Device [POST /devices/{id}/year/show]
 
@@ -250,12 +341,14 @@ First of all, you need to create your own API key through your Monitoring Assist
 
     + Attributes
         - date: `2017` (string) - Define the current date
-        - raw: `1200` (number) - Rw data
         - x: `2017` (string) - x value axis
-        - y: `120` (number) - y value axis
+        - y: `120` (number) - y value axis (null if no data available)
         - color: `#d4e90f` (string) - Define the color on graphic
         - unit: `kWh` (string)
-        - url: (string) - internal use
+        - qf: `100` (number) - Quality Factor (internal use)
+        - tz: `Europe/Brussels` (string) - TimeZone
+        - iv: `false` (string) - Define if the value is interpolated
+        - url: (string) - Quick link in javascript (internal use)
                 
                 
 ### Get Data by year range for a Device [POST /devices/{id}/year-range/show]
@@ -279,12 +372,14 @@ First of all, you need to create your own API key through your Monitoring Assist
 
     + Attributes
         - date: `2017` (string) - Define the current date
-        - raw: `1200` (number) - Rw data
         - x: `Jan` (string) - x value axis
-        - y: `120` (number) - y value axis
+        - y: `120` (number) - y value axis (null if no data available)
         - color: `#d4e90f` (string) - Define the color on graphic
         - unit: `kWh` (string)
-        - url: (string) - internal use
+        - qf: `100` (number) - Quality Factor (internal use)
+        - tz: `Europe/Brussels` (string) - TimeZone
+        - iv: `false` (string) - Define if the value is interpolated
+        - url: (string) - Quick link in javascript (internal use)
     
 
 ### Get total Data for a Device [POST /devices/{id}/total/show]
@@ -305,10 +400,12 @@ First of all, you need to create your own API key through your Monitoring Assist
 
     + Attributes
         - date: `Total` (string) - Define the current date
-        - raw: `78630` (number) - Rw data
         - x: `Total` (string) - x value axis
-        - y: `786` (number) - y value axis
+        - y: `786` (number) - y value axis (null if no data available)
         - color: `#d4e90f` (string) - Define the color on graphic
-        - unit: `kWh` (string)
+        - qf: `100` (number) - Quality Factor (internal use)
+        - tz: `Europe/Brussels` (string) - TimeZone
+        - iv: `false` (string) - Define if the value is interpolated
+        - url: (string) - Quick link in javascript (internal use)
         
         ## Devices [/devices/{id}/show]
