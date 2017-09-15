@@ -94,6 +94,11 @@ First of all, you need to create your own API key through your Monitoring Assist
                                                     - theoretical_year: `9457` (number) - production in kWh for the year
                                                     - theoretical_index: `60162` (number) - Theoretical Index
                                                     - theoretical_index_euro: `33690` (number) - Index converted in EUR
+                                        - photovoltaic_roofs_globals: - present only if there is at least one photovoltaic roof
+                                            - theoretical_index: `154788` (number) - Theoretical Index for all photovoltaic roofs (Sum of them)
+                                            - theoretical_index_euro: `35214` (number) - Theoretical Index in EUR for all photovoltaic roofs (Sum of them)
+
+                
 
 ## Prospects [/prospects]
 
@@ -112,6 +117,13 @@ First of all, you need to create your own API key through your Monitoring Assist
     + prospect_first_name: `alex` (string, required) - Firstname
     + prospect_last_name: `dupont` (string, required) - Lastname
     + prospect_language_code: `FR` (string, required) - Language Code
+    + prospect_address_name: `Home` (string, required) - Name of the address
+    + prospect_address_street: `Rue des patates` (string, required) - Street
+    + prospect_address_street_number: `103` (number, required) - Street number
+    + prospect_address_box: `2` (number, optional) - Street box number
+    + prospect_address_city: `Bruxelles` (string, required) - City
+    + prospect_address_zip: `1083` (number, required) - Postal Code
+    + prospect_address_country_code: `BE` (string, required) - Country code
     + prospect_address_phone: `042587545` (string, required) - Phone
     + prospect_installation_name: `PV Installation` (string, required) - Name of the installation
     + prospect_installation_date: `2017-04-17` (string, required) - Creation date of the installation
@@ -142,6 +154,13 @@ First of all, you need to create your own API key through your Monitoring Assist
     + prospect_first_name: `alex` (string, required) - Firstname
     + prospect_last_name: `dupont` (string, required) - Lastname
     + prospect_language_code: `FR` (string, required) - Language Code
+    + prospect_address_name: `Home` (string, required) - Name of the address
+    + prospect_address_street: `Rue des patates` (string, required) - Street
+    + prospect_address_street_number: `103` (number, required) - Street number
+    + prospect_address_box: `2` (number, optional) - Street box number
+    + prospect_address_city: `Bruxelles` (string, required) - City
+    + prospect_address_zip: `1083` (number, required) - Postal Code
+    + prospect_address_country_code: `BE` (string, required) - Country code
     + prospect_address_phone: `042587545` (string, required) - Phone
     + prospect_installation_name: `PV Installation` (string, required) - Name of the installation
     + prospect_installation_date: `2017-04-17` (string, required) - Creation date of the installation
@@ -231,6 +250,10 @@ First of all, you need to create your own API key through your Monitoring Assist
                                         - theoretical_year: `9457` (number) - production in kWh for the year
                                         - theoretical_index: `60162` (number) - Theoretical Index
                                         - theoretical_index_euro: `33690` (number) - Index converted in EUR
+                            - photovoltaic_roofs_globals: - present only if there is at least one photovoltaic roof
+                                - theoretical_index: `154788` (number) - Theoretical Index for all photovoltaic roofs (Sum of them)
+                                - theoretical_index_euro: `35214` (number) - Theoretical Index in EUR for all photovoltaic roofs (Sum of them)
+
                         
 ### Get Theorical Index [POST /installations/theorical-index]
 
@@ -339,6 +362,9 @@ First of all, you need to create your own API key through your Monitoring Assist
                         - theoretical_year: `9457` (number) - production in kWh for the year
                         - theoretical_index: `60162` (number) - Theoretical Index
                         - theoretical_index_euro: `33690` (number) - Index converted in EUR
+            - photovoltaic_roofs_globals: - present only if there is at least one photovoltaic roofWith 
+                - theoretical_index: `154788` (number) - Theoretical Index for all photovoltaic roofs (Sum of them)
+                - theoretical_index_euro: `35214` (number) - Theoretical Index in EUR for all photovoltaic roofs (Sum of them)
 
 ## Devices [/devices/{id}/show]
 
