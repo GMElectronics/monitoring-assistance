@@ -27,7 +27,7 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - success: `1` (boolean) - Define if the call is done correctly or not. If 0, you will have an explanation
+        - success: `1` (number) - Define if the call is done correctly or not. If 0, you will have an explanation
         - explanation: `` (string) - When an error occurs, this field is not empty
         - data:
             - collection:
@@ -77,8 +77,9 @@ First of all, you need to create your own API key through your Monitoring Assist
                                         - index_euro: `10` (number) - index converted in EUR
                                         - brand: `schneider` (string) - brand of the device
                                         - model: `PM800` (string) - model of the device
-                                        - type: `Water Meter` (string) - Type of Device
+                                        - type: `Electrical Meter` (string) - Type of Device
                                         - unit: `L` (string) - Unit of the measurand
+                                        - graph_type: `column` (string) - Graph type selected by the user
                                         - photovoltaic_roofs:
                                             - count: `1` (number) - number of pv roofs found for the device
                                             - data:
@@ -136,8 +137,10 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - success: `1` (boolean) - Define if the call is done correctly or not. If 0, you will have an explanation
+        - success: `1` (number) - Define if the call is done correctly or not. If 0, you will have an explanation
         - explanation: `` (string) - When an error occurs, this field is not empty
+        - data:
+            - prospect_id: `108644` (number) - the created prospect's id
         
 ### Update a prospect [POST /prospect/update]
 
@@ -149,6 +152,7 @@ First of all, you need to create your own API key through your Monitoring Assist
             
 + Parameters 
     
+    + prospect_id: `101` (number, required) - Prospect's id
     + prospect_login: `email` (string, required) - Prospect's email is used as login
     + prospect_password: `password` (string, required) - Password
     + prospect_first_name: `alex` (string, required) - Firstname
@@ -173,7 +177,7 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - success: `1` (boolean) - Define if the call is done correctly or not. If 0, you will have an explanation
+        - success: `1` (number) - Define if the call is done correctly or not. If 0, you will have an explanation
         - explanation: `` (string) - When an error occurs, this field is not empty
 
 
@@ -191,7 +195,7 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - success: `1` (boolean) - Define if the call is done correctly or not. If 0, you will have an explanation
+        - success: `1` (number) - Define if the call is done correctly or not. If 0, you will have an explanation
         - explanation: `` (string) - When an error occurs, this field is not empty
         - count: `1` (number) - number of installations
         - data:
@@ -233,8 +237,9 @@ First of all, you need to create your own API key through your Monitoring Assist
                             - index_euro: `10` (number) - index converted in EUR
                             - brand: `schneider` (string) - brand of the device
                             - model: `PM800` (string) - model of the device
-                            - type: `Water Meter` (string) - Type of Device
+                            - type: `Electrical Meter` (string) - Type of Device
                             - unit: `L` (string) - Unit of the measurand
+                            - graph_type: `column` (string) - Graph type selected by the user
                             - photovoltaic_roofs:
                                 - count: `1` (number) - number of pv roofs found for the device
                                 - data:
@@ -277,10 +282,11 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - success: `1` (boolean) - Define if the call is done correctly or not. If 0, you will have an explanation
+        - success: `1` (number) - Define if the call is done correctly or not. If 0, you will have an explanation
         - explanation: `` (string) - When an error occurs, this field is not empty
         - data:
-            - theoretical_index: `9214.2` (number) - Define the index of the electrical meter today
+            - theoretical_index: `9214.2` (number) - Define the index of the electrical meter for today
+            - theoretical_index_euro: `8236` (number) - Define the index of the electrical meter for today in EURO
         
 ### Get Coordinates [POST /installations/coordinates]
 
@@ -303,7 +309,7 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
      + Attributes
-        - success: `1` (boolean) - Define if the call is done correctly or not. If 0, you will have an explanation
+        - success: `1` (number) - Define if the call is done correctly or not. If 0, you will have an explanation
         - explanation: `` (string) - When an error occurs, this field is not empty
         - data:
             - latitude: `50` (number) - latitude
@@ -327,7 +333,7 @@ First of all, you need to create your own API key through your Monitoring Assist
 + Response 200 (application/json)
 
     + Attributes
-        - success: `1` (boolean) - Define if the call is done correctly or not. If 0, you will have an explanation
+        - success: `1` (number) - Define if the call is done correctly or not. If 0, you will have an explanation
         - explanation: `` (string) - When an error occurs, this field is not empty
         - count: `1` (number) - number of devices
         - data:
@@ -345,8 +351,9 @@ First of all, you need to create your own API key through your Monitoring Assist
             - index_euro: `10` (number) - index converted in EUR
             - brand: `schneider` (string) - brand of the device
             - model: `PM800` (string) - model of the device
-            - type: `Water Meter` (string) - Type of Device
+            - type: `Electrical Meter` (string) - Type of Device
             - unit: `L` (string) - Unit of the measurand
+            - graph_type: `column` (string) - Graph type selected by the user
             - photovoltaic_roofs:
                 - count: `1` (number) - number of pv roofs found for the device
                 - data:
